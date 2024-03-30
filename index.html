@@ -7,37 +7,76 @@
     <style>
         table {
             border-collapse: collapse;
-            width: 300px;
-            height: 300px;
+            width: 600px;
+            height: 600px;
             margin: auto;
         }
         td {
-            border: 1px solid black;
-            width: 100px;
-            height: 100px;
+            border: 2px solid rgb(0, 82, 77);
+            width: 200px;
+            height: 200px;
             text-align: center;
             font-size: 20px;
+            cursor: pointer;
+            font-family: 'Comic Sans MS';
+        }
+        .selected {
+            background-color: green;
         }
     </style>
 </head>
 <body>
-    <h1>3x3 Bingo Grid</h1>
-    <table>
+    <table id="bingoGrid">
         <tr>
-            <td id="cell1"></td>
-            <td id="cell2"></td>
-            <td id="cell3"></td>
+            <td id="cell1" onclick="toggleCell('cell1')"></td>
+            <td id="cell2" onclick="toggleCell('cell2')"></td>
+            <td id="cell3" onclick="toggleCell('cell3')"></td>
         </tr>
         <tr>
-            <td id="cell4"></td>
-            <td id="cell5"></td>
-            <td id="cell6"></td>
+            <td id="cell4" onclick="toggleCell('cell4')"></td>
+            <td id="cell5" onclick="toggleCell('cell5')"></td>
+            <td id="cell6" onclick="toggleCell('cell6')"></td>
         </tr>
         <tr>
-            <td id="cell7"></td>
-            <td id="cell8"></td>
-            <td id="cell9"></td>
+            <td id="cell7" onclick="toggleCell('cell7')"></td>
+            <td id="cell8" onclick="toggleCell('cell8')"></td>
+            <td id="cell9" onclick="toggleCell('cell9')"></td>
         </tr>
     </table>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            shuffleGrid();
+        });
+
+        function toggleCell(cellId) {
+            var cell = document.getElementById(cellId);
+            cell.classList.toggle("selected");
+        }
+
+        function shuffleGrid() {
+            var gridCells = document.querySelectorAll('#bingoGrid td');
+            gridCells.forEach(function(cell) {
+                cell.innerText = '';
+            });
+
+            var strings = [
+                "Gardening talk",
+                "Pointed question",
+                "Extended silence",
+                "Papa makes joke - Mama not impressed.",
+                "There really isn't much washing up",
+                "Conversation inaccessible to us",
+                "Comment on how healthy the meal is",
+                "Pity me :(",
+                "Statement intended to make someone feel bad without saying as much"
+            ];
+            strings.sort(() => Math.random() - 0.5);
+
+            gridCells.forEach(function(cell, index) {
+                cell.innerText = strings[index];
+            });
+        }
+    </script>
 </body>
 </html>
